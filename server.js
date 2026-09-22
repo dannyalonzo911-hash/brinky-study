@@ -30,7 +30,7 @@ async function readJson(req) {
   let raw = '';
   for await (const chunk of req) {
     raw += chunk;
-    if (raw.length > 1_000_000) throw new Error('Request too large');
+    if (raw.length > 8_000_000) throw new Error('Request too large');
   }
   return raw ? JSON.parse(raw) : {};
 }
@@ -57,7 +57,17 @@ async function handleChat(req, res) {
     if (!message) return send(res, 400, JSON.stringify({ error: 'Message is required.' }));
 
     const contents = normalizeHistory(body.history);
-    contents.push({ role: 'user', parts: [{ text: message.slice(0, 12000) }] });
+    const userParts = [{ text: message.slice(0, 12000) }];
+
+    if (typeof body.image === 'string' && body.image.startsWith('data:image/')) {
+      const match = body.image.match(/^data:(image\/(?:png|jpeg|jpg|webp));base64,([A-Za-z0-9+/=]+)$/);
+      if (!match) return send(res, 400, JSON.stringify({ error: 'Unsupported image format.' }));
+      const [, mimeType, data] = match;
+      if (data.length > 6_500_000) return send(res, 413, JSON.stringify({ error: 'Image is too large.' }));
+      userParts.push({ inline_data: { mime_type: mimeType === 'image/jpg' ? 'image/jpeg' : mimeType, data } });
+    }
+
+    contents.push({ role: 'user', parts: userParts });
 
     const url = `https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(GEMINI_MODEL)}:generateContent?key=${encodeURIComponent(GEMINI_API_KEY)}`;
     const apiRes = await fetch(url, {
