@@ -38,11 +38,17 @@
       <section id="messages" class="messages"></section>
 
       <div class="composer-wrap">
+        <div id="pastePreview" class="paste-preview" hidden>
+          <img id="pasteImage" alt="Attached screenshot preview" />
+          <button id="removeImage" class="remove-image" aria-label="Remove screenshot">×</button>
+        </div>
         <div class="composer">
+          <input id="imageInput" type="file" accept="image/*" hidden />
+          <button id="attach" class="attach" type="button" aria-label="Attach image">＋</button>
           <textarea id="input" rows="1" placeholder="Message Brinky Study..."></textarea>
           <button id="send" class="send" aria-label="Send">↑</button>
         </div>
-        <div class="hint">Enter to send • Shift+Enter for a new line</div>
+        <div class="hint">Paste a screenshot with Ctrl+V • Enter to send • Shift+Enter for a new line</div>
       </div>
     </main>
   </div>
