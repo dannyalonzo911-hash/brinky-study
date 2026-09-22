@@ -1,0 +1,13 @@
+{
+  "name": "brinky-study-cloud",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Brinky Study - cloud-hostable AI study chat",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

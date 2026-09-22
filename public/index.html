@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Brinky Study</title>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand"><div class="logo">B</div><span>Brinky Study</span></div>
+      <button id="newChat" class="new-chat">＋ New chat</button>
+      <div class="section-label">Chats</div>
+      <div id="chatList" class="chat-list"></div>
+      <div class="sidebar-foot">Study mode • cloud edition</div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <button id="menu" class="menu">☰</button>
+        <div class="title">Brinky Study</div>
+        <div id="status" class="status">Checking AI…</div>
+      </header>
+
+      <section id="welcome" class="welcome">
+        <div class="big-logo">B</div>
+        <h1>What are we studying?</h1>
+        <p>Ask a question, get an explanation, or work through a problem step by step.</p>
+        <div class="quick-grid">
+          <button class="quick" data-prompt="Give me an Algebra 2 equation to solve, then wait for my answer.">Algebra 2 practice</button>
+          <button class="quick" data-prompt="Explain the causes of the American Civil War in simple terms.">History help</button>
+          <button class="quick" data-prompt="Quiz me with 5 biology questions, one at a time.">Biology quiz</button>
+          <button class="quick" data-prompt="Help me outline a short school essay. Ask me for the topic first.">Essay outline</button>
+        </div>
+      </section>
+
+      <section id="messages" class="messages"></section>
+
+      <div class="composer-wrap">
+        <div class="composer">
+          <textarea id="input" rows="1" placeholder="Message Brinky Study..."></textarea>
+          <button id="send" class="send" aria-label="Send">↑</button>
+        </div>
+        <div class="hint">Enter to send • Shift+Enter for a new line</div>
+      </div>
+    </main>
+  </div>
+  <script src="/app.js"></script>
+</body>
+</html>
